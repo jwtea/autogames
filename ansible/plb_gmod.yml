@@ -1,0 +1,6 @@
+---
+- include: cpt_bootstrap.yml
+- include: cpt_users.yml
+- include: cpt_ufw.yml
+- include: cpt_fail2ban.yml
+- include: cpt_steam.yml

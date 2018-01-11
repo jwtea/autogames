@@ -1,0 +1,9 @@
+- name: Create ~/bin
+  file: state=directory path=~/bin
+- name: Get steam cli
+  unarchive:
+    src: http://media.steampowered.com/client/steamcmd_linux.tar.gz
+    dest: ~/bin
+    remote_src: yes
+- name: Login to steam
+  command: ~/bin/.steamcmd.sh +login anonymous +quit

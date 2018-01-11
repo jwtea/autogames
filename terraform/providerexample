@@ -1,0 +1,15 @@
+variable "do_token" {
+  default = ""
+}
+variable "pub_key" {
+  default = "~/.ssh/key.pub"
+}
+variable "pvt_key" {
+  default = "~/.ssh/key"
+}
+variable "ssh_fingerprint" {
+  default = ""
+}
+provider "digitalocean" {
+  token = "${var.do_token}"
+}

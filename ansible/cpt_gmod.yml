@@ -1,0 +1,14 @@
+- name: Download update script
+  get_url: url=http://pastebin.com/raw/CRmMbJQA
+    dest: ~/update_gmod.sh
+    mode: 0755
+- name: Add packages to download
+  blockinfile:
+    path: ~/update_gmod.sh
+    block: |
+      "update_server {{ item.id }} {{ item.dest }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.name }}"
+  with_items:
+    - { id: 232250, dest: "content/tf2"}
+- name: Run update
+  command: ./update_gmod.sh
