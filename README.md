@@ -7,7 +7,7 @@
 * Create hosts.yml from hostsexample
 
 ### Usage 
-`ansible-playbook -i inventories/production/hosts.yml -l HOST plb_lemp.yml`
+`ansible-playbook -i inventories/production/hosts.yml -l HOST plb_example.yml`
 
 ## Terraform
 
