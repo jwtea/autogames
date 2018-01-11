@@ -5,9 +5,9 @@
 - name: Add packages to download
   blockinfile:
     path: ~/update_gmod.sh
+    insertafter: "# Add any additional servers here by repeating the above, but using a different directory name."
     block: |
       "update_server {{ item.id }} {{ item.dest }}"
-    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.name }}"
   with_items:
     - { id: 232250, dest: "content/tf2"}
 - name: Run update
