@@ -1,0 +1,6 @@
+- hosts: all
+  user: ubuntu
+  vars:
+    owner: ubuntu
+  roles:
+  - jwtea.fail2ban

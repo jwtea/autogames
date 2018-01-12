@@ -1,0 +1,19 @@
+- name: Create ~/bin
+  file: 
+    state: directory 
+    path: ~/bin
+- name: Get steam cli
+  unarchive:
+    src: http://media.steampowered.com/client/steamcmd_linux.tar.gz
+    dest: ~/bin
+    remote_src: yes
+- name: Install lib32gcc1
+  apt: 
+    name: "{{item}}"
+    update_cache: yes
+  with_items:
+    - lib32gcc1 
+  become: yes
+  become_method: sudo
+- name: Login to steam
+  shell: "~/bin/steamcmd.sh +login anonymous +quit"

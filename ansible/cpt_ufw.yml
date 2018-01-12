@@ -1,16 +1,6 @@
-- name: Configure ufw
-  ufw:
-    rule: allow
-    name: OpenSSH
-  become: yes
-  become_method: sudo
-- ufw:
-    rule: limit
-    port: ssh
-    proto: tcp
-  become: yes
-  become_method: sudo
-- ufw:
-    state: enabled
-  become: yes
-  become_method: sudo
+- hosts: all
+  user: ubuntu
+  vars:
+    owner: ubuntu
+  roles:
+  - jwtea.fail2ban

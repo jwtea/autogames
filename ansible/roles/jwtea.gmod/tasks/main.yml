@@ -1,0 +1,15 @@
+- name: Download update script
+  get_url: 
+    url: http://pastebin.com/raw/CRmMbJQA
+    dest: ~/update_gmod.sh
+    mode: 0755
+- name: Add packages to download
+  blockinfile:
+    path: ~/update_gmod.sh
+    insertafter: "# Add any additional servers here by repeating the above, but using a different directory name."
+    block: |
+      update_server {{ item.id }} {{ item.dest }}
+  with_items:
+    - { id: 232250, dest: "content/tf2"}
+- name: Run update
+  shell: "./update_gmod.sh"

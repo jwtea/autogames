@@ -1,0 +1,20 @@
+- name: Install fail2ban
+  apt: 
+    name: fail2ban
+    update_cache: yes
+    state: latest
+  become: yes
+  become_method: sudo
+- name: Copy local jails
+  copy:
+    src: /etc/fail2ban/fail2ban.conf
+    dest: /etc/fail2ban/fail2ban.local
+    remote_src: yes
+  become: yes
+  become_method: sudo
+- copy:
+    src: /etc/fail2ban/jail.conf
+    dest: /etc/fail2ban/jail.local
+    remote_src: yes
+  become: yes
+  become_method: sudo
