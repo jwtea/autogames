@@ -10,6 +10,30 @@
     proto: tcp
   become: yes
   become_method: sudo
+- ufw: 
+    rule: allow
+    port: 6003
+    proto: tcp
+  become: yes
+  become_method: sudo
+- ufw:
+    rule: allow
+    port: 7001
+    proto: tcp
+  become: yes
+  become_method: sudo
+- ufw: 
+    rule: allow
+    port: 27005
+    proto: udp
+  become: yes
+  become_method: sudo
+- ufw:
+    rule: allow
+    port: '27010:27015'
+    proto: udp
+  become: yes
+  become_method: sudo
 - ufw:
     state: enabled
   become: yes

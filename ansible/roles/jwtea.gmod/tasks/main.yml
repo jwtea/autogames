@@ -13,3 +13,5 @@
     - { id: 232250, dest: "content/tf2"}
 - name: Run update
   shell: "./update_gmod.sh"
+- name: copy random libc shit
+  command: cp ~/bin/linux32/libstdc++.so.6 ~/server_1/bin/
