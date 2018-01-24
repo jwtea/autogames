@@ -11,7 +11,10 @@
       update_server {{ item.id }} {{ item.dest }}
   with_items:
     - { id: 232250, dest: "content/tf2"}
+    - { id: 240, dest: "content/cssource"}
 - name: Run update
   shell: "./update_gmod.sh"
 - name: copy random libc shit
   command: cp ~/bin/linux32/libstdc++.so.6 ~/server_1/bin/
+- name: get ulib
+  shell: "cd ~/server_1/garrysmod/addons && git clone https://github.com/TeamUlysses/ulx.git && git clone https://github.com/TeamUlysses/ulib.git"
