@@ -1,18 +1,33 @@
 - name: Create ~/bin
-  file: 
-    state: directory 
+  file:
+    state: directory
     path: ~/bin
 - name: Get steam cli
   unarchive:
     src: http://media.steampowered.com/client/steamcmd_linux.tar.gz
     dest: ~/bin
     remote_src: yes
-- name: Install lib32gcc1
-  apt: 
-    name: "{{item}}"
+- name: Install deps lib32gcc1
+  apt:
+    pkg:
+      - lib32gcc1
+      # - libsdl2-dev
+      # - libsdl2-2.0-0
+      # - libjpeg9-dev
+      # - libwebp-dev
+      # - libtiff5-dev
+      # - libsdl2-image-dev
+      # - libsdl2-image-2.0-0
+      # - libmikmod-dev
+      # - libfishsound1-dev
+      # - libsmpeg-dev
+      # - liboggz2-dev
+      # - libflac-dev
+      # - libfluidsynth-dev
+      # - libsdl2-mixer-dev
+      # - libsdl2-mixer-2.0-0
     update_cache: yes
-  with_items:
-    - lib32gcc1 
+    state: latest
   become: yes
   become_method: sudo
 - name: Login to steam

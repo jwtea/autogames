@@ -1,0 +1,5 @@
+user: ubuntu
+ansible_user: ubuntu
+gmod_superadmin_username: Timpsons
+gmod_superadmin_steamid: "STEAM_1:0:30786885"
+gmod_workshop_collection: 2085123477

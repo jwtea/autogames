@@ -1,5 +1,5 @@
 - name: Download update script
-  get_url: 
+  get_url:
     url: http://pastebin.com/raw/CRmMbJQA
     dest: ~/update_gmod.sh
     mode: 0755
@@ -9,12 +9,49 @@
     insertafter: "# Add any additional servers here by repeating the above, but using a different directory name."
     block: |
       update_server {{ item.id }} {{ item.dest }}
-  with_items:
-    - { id: 232250, dest: "content/tf2"}
-    - { id: 240, dest: "content/cssource"}
+  with_items: "{{ gmod_steam_content }}"
 - name: Run update
   shell: "./update_gmod.sh"
-- name: copy random libc shit
+- name: Copy libstdc binary to server dir
   command: cp ~/bin/linux32/libstdc++.so.6 ~/server_1/bin/
-- name: get ulib
-  shell: "cd ~/server_1/garrysmod/addons && git clone https://github.com/TeamUlysses/ulx.git && git clone https://github.com/TeamUlysses/ulib.git"
+- name: Get addons
+  git:
+    force: yes
+    repo: "{{ item.repo }}"
+    dest: "~/server_1/garrysmod/addons/{{ item.name }}"
+  with_items: "{{ gmod_addons }}"
+- name: Update mount cfg
+  template:
+    src: mount.cfg.j2
+    dest: ~/server_1/garrysmod/cfg/mount.cfg
+- name: Update server cfg
+  template:
+    src: server.cfg.j2
+    dest: ~/server_1/garrysmod/cfg/server.cfg
+- name: Upload server start script
+  template:
+    src: runserver.cfg.j2
+    dest: ~/server_1/runserver.sh
+- name: Update ulx users
+  template:
+    src: users.j2
+    dest: ~/server_1/garrysmod/settings/users.txt
+- name: Get gamemodes
+  git:
+    force: yes
+    repo: "{{ item.repo }}"
+    dest: "~/gamemodes/{{ item.name }}"
+  with_items: "{{ gmod_gamemodes }}"
+- name: Unpack gamemodes with subdir
+  command: "mv ~/gamemodes/{{ item.name }}/{{ item.subdir }} ~/server_1/garrysmod/gamemodes/{{item.subdir}}"
+  with_items: "{{ gmod_gamemodes }}"
+  when: item.subdir is defined
+- name: Unpack gamemodes
+  command: "mv ~/gamemodes/{{ item.name }} ~/server_1/garrysmod/gamemodes/{{ item.name }}"
+  with_items: "{{ gmod_gamemodes }}"
+  when: item.subdir is undefined
+- name: Update murder localchat
+  lineinfile:
+    path: ~/server_1/garrysmod/gamemodes/murder/gamemode/init.lua
+    regexp: '^hhvm\.server\.port \= 9000$'
+    line: 'GM.LocalChat = CreateConVar("mu_localchat", 1, bit.bor(FCVAR_NOTIFY), "Local chat, when enabled only nearby players can hear other players" )'

@@ -1,0 +1,7 @@
+"mountcfg"
+{
+
+        {% for item in gmod_content_mount_paths %}
+        "{{ item.name }}" "{{ item.path }}"
+        {% endfor %}
+}

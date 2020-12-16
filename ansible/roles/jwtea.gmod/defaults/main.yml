@@ -1,0 +1,34 @@
+gmod_addons:
+  - name: "ulx"
+    repo: "https://github.com/TeamUlysses/ulx.git"
+  - name: "ulib"
+    repo: "https://github.com/TeamUlysses/ulib.git"
+  - name: "wsdl"
+    repo: "https://github.com/glua/wsdl.git"
+  - name: "pac3"
+    repo: "https://github.com/CapsAdmin/pac3.git"
+  - name: "libk"
+    repo: "https://github.com/Kamshak/LibK.git"
+  - name: "pointshop2"
+    repo: "https://github.com/Kamshak/Pointshop2.git"
+gmod_gamemodes:
+  - name: "deathrun"
+    repo: "https://github.com/Mr-Gash/GMod-Deathrun.git"
+    subdir: "deathrun"
+  - name: "flood"
+    repo: "https://github.com/Mythikos/gmod-flood-2.0.git"
+    subdir: "flood"
+  - name: "murder"
+    repo: "https://github.com/MechanicalMind/murder.git"
+  - name: "prophunt"
+    repo: "https://github.com/kowalski7cc/prophunt-hidenseek-original.git"
+gmod_steam_content:
+  - id: 232250
+    dest: "content/tf2"
+  - id: 232330
+    dest: "content/cssourceserver"
+gmod_content_mount_paths:
+  - name: "tf2"
+    path: "/home/ubuntu/content/tf2/tf"
+  - name: "cstrike"
+    path: "/home/ubuntu/content/cssourceserver/cstrike"
